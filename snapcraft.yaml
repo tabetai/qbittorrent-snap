@@ -1,0 +1,26 @@
+name: qbittorrent-tabetai
+version: '3.1.1'
+summary: Flacon snap
+description: |
+  Flacon extracts individual tracks from one big audio file containing the entire album of music 
+  and saves them as separate audio files.
+grade: devel
+confinement: devmode
+
+apps:
+  flacon:
+    command: desktop-launch qbittorrent
+    plugs: [unity7, x11, opengl, gsettings, home, removable-media, raw-usb]
+    
+parts:
+  qbittorrent:
+    source: https://github.com/qbittorrent/qBittorrent
+    plugin: autotools
+    after: [desktop-qt5, libtorrent]
+  
+  libtorrent:
+    source: https://github.com/arvidn/libtorrent.git
+    plugin: autotools
+    configflags:
+       ./configure --disable-debug --enable-encryption --with-libgeoip=system CXXFLAGS=-std=c++11
+
