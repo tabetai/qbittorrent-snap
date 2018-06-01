@@ -4,13 +4,14 @@ summary: Flacon snap
 description: |
   Flacon extracts individual tracks from one big audio file containing the entire album of music 
   and saves them as separate audio files.
-grade: devel
-confinement: devmode
+grade: stable
+confinement: strict
 
 apps:
-  flacon:
+  qbittorrent:
     command: desktop-launch qbittorrent
     plugs: [unity7, x11, opengl, gsettings, home, removable-media, raw-usb]
+    desktop: usr/share/applications/qbittorrent.desktop
     
 parts:
   qbittorrent:
